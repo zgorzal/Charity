@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const institutionsList = document.querySelector(".help--slides-items")
+    const institutionsList = document.querySelector(".help--slides-items");
+    const donations = document.getElementById("donations");
 
     function apiListInstitution() {
         return fetch(
@@ -36,5 +37,21 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     );
+
+    function apiDonationsList() {
+        return fetch(
+            'http://localhost:8080/donation',
+        ).then(resp => {
+            return resp.json();
+        });
+    }
+
+    apiDonationsList().then(result => {
+        let count = 0;
+        result.forEach(function (el) {
+            count = count + el.quantity;
+            donations.innerText = count;
+        })
+    })
 
 });
