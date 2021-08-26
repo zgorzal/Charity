@@ -10,7 +10,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class InstitutionService {
-    public final InstitutionRepository institutionRepository;
+    private final InstitutionRepository institutionRepository;
 
     public List<Institution> getAllInstitutions() {
         return institutionRepository.findAll();
