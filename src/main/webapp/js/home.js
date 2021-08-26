@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const institutionsList = document.querySelector(".help--slides-items");
     const donations = document.getElementById("donations");
+    const donationsCount = document.getElementById("donationsCount");
 
     function apiListInstitution() {
         return fetch(
@@ -48,10 +49,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     apiDonationsList().then(result => {
         let count = 0;
+        let donationAmount = 0;
         result.forEach(function (el) {
             count = count + el.quantity;
-            donations.innerText = count;
+            donationAmount++
         })
+        donations.innerText = count;
+        donationsCount.innerText = donationAmount;
     })
 
 });
