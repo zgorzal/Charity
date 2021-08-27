@@ -1,7 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     const divStepOne = document.getElementById("stepOne");
-    const divStepthree = document.getElementById("stepThree");
+    const divStepThree = document.getElementById("stepThree");
+    const bags = document.getElementById("bags");
+    const bagsSummary = document.getElementById("bagsSummary");
+    const goToSummary = document.getElementById("goToSummary");
+    const selectInstitution = document.getElementById("selectInstitution");
+    let institution = '';
+    const addressInput = document.getElementById("addressInput");
+    const cityInput = document.getElementById("cityInput");
+    const postcodeInput = document.getElementById("postcodeInput");
+    const phoneInput = document.getElementById("phoneInput");
+    const dataInput = document.getElementById("dataInput");
+    const timeInput = document.getElementById("timeInput");
+    const more_infoInput = document.getElementById("more_infoInput");
+    const address = document.getElementById("address");
+    const city = document.getElementById("city");
+    const postcode = document.getElementById("postcode");
+    const phone = document.getElementById("phone");
+    const data = document.getElementById("data");
+    const time = document.getElementById("time");
+    const more_info = document.getElementById("more_info");
 
     function apiListCategories() {
         return fetch(
@@ -54,6 +73,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 const radio = document.createElement("span");
                 radio.classList.add("checkbox");
                 radio.classList.add("radio");
+                radio.name = el.name;
+                radio.addEventListener('click', function (event) {
+                    institution = this.name;
+                });
                 const description = document.createElement("span");
                 description.classList.add("description");
                 const title = document.createElement("div");
@@ -68,9 +91,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 description.appendChild(subtitle);
                 label.appendChild(description);
                 div.appendChild(label);
-                divStepthree.insertBefore(div, divStepthree.lastElementChild);
+                divStepThree.insertBefore(div, divStepThree.lastElementChild);
             });
         }
     );
 
+    goToSummary.addEventListener('click', function (event) {
+        bagsSummary.innerText = 'Ilość worków: ' + bags.value;
+        selectInstitution.innerText = 'Dla fundacji: ' + institution;
+        address.innerText = addressInput.value;
+        city.innerText = cityInput.value;
+        postcode.innerText = postcodeInput.value;
+        phone.innerText = phoneInput.value;
+        data.innerText = dataInput.value;
+        time.innerText = timeInput.value;
+        more_info.innerText = more_infoInput.value;
+    })
 });
