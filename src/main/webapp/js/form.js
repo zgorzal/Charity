@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const goToSummary = document.getElementById("goToSummary");
     const selectInstitution = document.getElementById("selectInstitution");
     let institution = '';
+
     const addressInput = document.getElementById("addressInput");
     const cityInput = document.getElementById("cityInput");
     const postcodeInput = document.getElementById("postcodeInput");
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const dataInput = document.getElementById("dataInput");
     const timeInput = document.getElementById("timeInput");
     const more_infoInput = document.getElementById("more_infoInput");
+
     const address = document.getElementById("address");
     const city = document.getElementById("city");
     const postcode = document.getElementById("postcode");

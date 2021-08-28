@@ -1,9 +1,7 @@
 package pl.zgorzal.charity.donation;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,5 +14,10 @@ public class DonationController {
     @GetMapping
     public List<Donation> getAllDonations() {
         return donationService.getAllDonations();
+    }
+
+    @PostMapping
+    public void addDonation(@RequestBody DonationAddFormDTO donationAddFormDTO) {
+        donationService.addDonation(donationAddFormDTO);
     }
 }

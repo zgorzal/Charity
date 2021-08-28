@@ -1,6 +1,8 @@
 package pl.zgorzal.charity.donation;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.zgorzal.charity.category.Category;
 import pl.zgorzal.charity.institution.Institution;
@@ -22,7 +24,7 @@ public class Donation {
 
     private Integer quantity;
 
-    @OneToMany
+    @ManyToMany
     private List<Category> categories;
 
     @OneToOne
