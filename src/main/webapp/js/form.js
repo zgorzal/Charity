@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const goToSummary = document.getElementById("goToSummary");
     const selectInstitution = document.getElementById("selectInstitution");
     let institution = '';
+    let institutionId = 0;
+    let categoryId = 0;
+    const submit = document.getElementById('send');
 
     const addressInput = document.getElementById("addressInput");
     const cityInput = document.getElementById("cityInput");
@@ -42,9 +45,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 input.type = "checkbox";
                 const checkbox = document.createElement("span");
                 checkbox.classList.add("checkbox");
+                checkbox.dataset.id = el.id;
+                checkbox.addEventListener('click', function (event) {
+                    categoryId = this.dataset.id;
+                });
                 const description = document.createElement("span");
                 description.classList.add("description");
                 description.innerText = el.name;
+                description.setAttribute('descriptionId', el.id);
                 label.appendChild(input);
                 label.appendChild(checkbox);
                 label.appendChild(description);
@@ -76,8 +84,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 radio.classList.add("checkbox");
                 radio.classList.add("radio");
                 radio.name = el.name;
+                radio.dataset.id = el.id;
                 radio.addEventListener('click', function (event) {
                     institution = this.name;
+                    institutionId = this.dataset.id;
                 });
                 const description = document.createElement("span");
                 description.classList.add("description");
@@ -109,4 +119,34 @@ document.addEventListener("DOMContentLoaded", function () {
         time.innerText = timeInput.value;
         more_info.innerText = more_infoInput.value;
     })
+
+    function apiPostAddDonation() {
+        return fetch(
+            'http://localhost:8080/donation',
+            {
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    quantity: bags.value,
+                    categoriesId: categoryId,
+                    institutionId: institutionId,
+                    street: addressInput.value,
+                    city: cityInput.value,
+                    zipCode: postcodeInput.value,
+                    pickUpDate: dataInput.value,
+                    pickUpTime: timeInput.value,
+                    pickUpComment: more_infoInput.value
+                }),
+                method: 'POST'
+            }
+        ).then(resp => {
+            return resp.json();
+        });
+    }
+
+    submit.addEventListener('click', function (event) {
+        event.preventDefault();
+        apiPostAddDonation().then(response => {
+        });
+    })
+
 });
